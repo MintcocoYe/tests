@@ -17,7 +17,7 @@
 </head>
 
 <body>
-  <div id="3d-graph"></div>
+  <div id="3d-graph" style="width: 100vw; height: 100vh;"></div>
 
   <script type="module">
     import SpriteText from "//unpkg.com/three-spritetext/dist/three-spritetext.mjs";
@@ -114,13 +114,13 @@
         const sprite = new SpriteText(node.id);
         sprite.material.depthWrite = false; // Make sprite background transparent
         sprite.color = node.color;
-        sprite.textHeight = 8;
+        sprite.textHeight = 5; // Smaller text to make it more readable
         return sprite;
       });
 
-    // Spread nodes a little wider
-    Graph.d3Force('charge').strength(-120);
-
+    // Strengthen the connections and bring nodes closer
+    Graph.d3Force('charge').strength(-50);  // Smaller negative charge for closer nodes
+    Graph.d3Force('link').distance(50);     // Reduce link distance to bring nodes together
   </script>
 </body>
 </html>
