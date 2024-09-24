@@ -56,7 +56,7 @@
         { id: "HOUSING STABILITY - NSCH", group: 2 },
         { id: "RENTAL TYPE - NSCH", group: 2 },
 
-        // Third-Level Nodes: Categories
+        // Third-Level Nodes: 8 Unique Categories
         { id: "Household Size", group: 3 },
         { id: "Mortgage Status", group: 3 },
         { id: "Rental Status", group: 3 },
@@ -64,63 +64,4 @@
         { id: "Housing Condition", group: 3 },
         { id: "Housing Subsidy/Assistance", group: 3 },
         { id: "Number of Rooms/Bathrooms", group: 3 },
-        { id: "Housing Stability", group: 3 }
-      ],
-      links: [
-        // First-Level Nodes: Datasets to Housing-Related Codes
-        { source: "ACS 2019", target: "HOUSEHOLD SIZE - ACS" },
-        { source: "ACS 2019", target: "HOUSING TYPE - ACS" },
-        { source: "ACS 2019", target: "MORTGAGE - ACS" },
-        { source: "AHS 2019", target: "HOUSEHOLD SIZE - AHS" },
-        { source: "AHS 2019", target: "MORTGAGE - AHS" },
-        { source: "IPUMS 1940", target: "HOUSING STATUS - IPUMS" },
-        { source: "IPUMS 1940", target: "HOUSE VALUE - IPUMS" },
-        { source: "CPS", target: "RENTAL STATUS - CPS" },
-        { source: "CPS", target: "MORTGAGE STATUS - CPS" },
-        { source: "Decennial Census 2010", target: "HOUSING UNIT SIZE - Decennial Census" },
-        { source: "Decennial Census 2010", target: "NUMBER OF ROOMS - Decennial Census" },
-        { source: "Family Options Study", target: "HOUSING SUBSIDY - Family Options" },
-        { source: "Family Options Study", target: "HOUSING ASSISTANCE - Family Options" },
-        { source: "Moving to Opportunity", target: "HOPE VI Flag - Moving to Opportunity" },
-        { source: "Moving to Opportunity", target: "ADDRESS ID - Moving to Opportunity" },
-        { source: "NCVS 2017", target: "HOUSING CONDITION - NCVS" },
-        { source: "NCVS 2017", target: "HOUSE OWNERSHIP - NCVS" },
-        { source: "NSCH 2020", target: "HOUSING STABILITY - NSCH" },
-        { source: "NSCH 2020", target: "RENTAL TYPE - NSCH" },
-
-        // Second-Level Nodes: Housing-Related Codes to Categories
-        { source: "HOUSEHOLD SIZE - ACS", target: "Household Size" },
-        { source: "HOUSEHOLD SIZE - AHS", target: "Household Size" },
-        { source: "MORTGAGE - ACS", target: "Mortgage Status" },
-        { source: "MORTGAGE - AHS", target: "Mortgage Status" },
-        { source: "RENTAL STATUS - CPS", target: "Rental Status" },
-        { source: "RENTAL TYPE - NSCH", target: "Rental Status" },
-        { source: "HOUSING TYPE - ACS", target: "Housing Type" },
-        { source: "HOUSING CONDITION - NCVS", target: "Housing Condition" },
-        { source: "HOUSE OWNERSHIP - NCVS", target: "Housing Condition" },
-        { source: "HOUSING UNIT SIZE - Decennial Census", target: "Number of Rooms/Bathrooms" },
-        { source: "NUMBER OF ROOMS - Decennial Census", target: "Number of Rooms/Bathrooms" },
-        { source: "HOUSING SUBSIDY - Family Options", target: "Housing Subsidy/Assistance" },
-        { source: "HOUSING ASSISTANCE - Family Options", target: "Housing Subsidy/Assistance" },
-        { source: "HOUSING STABILITY - NSCH", target: "Housing Stability" },
-        { source: "HOPE VI Flag - Moving to Opportunity", target: "Housing Stability" }
-      ]
-    };
-
-    const Graph = ForceGraph3D()(document.getElementById('3d-graph'))
-      .graphData(gData)
-      .nodeAutoColorBy('group')
-      .nodeThreeObject(node => {
-        const sprite = new SpriteText(node.id);
-        sprite.material.depthWrite = false; // Make sprite background transparent
-        sprite.color = node.color;
-        sprite.textHeight = 5; // Smaller text to make it more readable
-        return sprite;
-      });
-
-    // Strengthen the connections and bring nodes closer
-    Graph.d3Force('charge').strength(-50);  // Smaller negative charge for closer nodes
-    Graph.d3Force('link').distance(50);     // Reduce link distance to bring nodes together
-  </script>
-</body>
-</html>
+        { id:
