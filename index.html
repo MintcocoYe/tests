@@ -4,15 +4,24 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>3D Knowledge Graph</title>
-  <style> 
-    body { margin: 0; } 
-  </style>
+  <style> body { margin: 0; } </style>
+
   <script src="//unpkg.com/3d-force-graph"></script>
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "//unpkg.com/three/build/three.module.js"
+      }
+    }
+  </script>
 </head>
+
 <body>
   <div id="3d-graph"></div>
 
-  <script>
+  <script type="module">
+    import SpriteText from "//unpkg.com/three-spritetext/dist/three-spritetext.mjs";
+
     const gData = {
       nodes: [
         { id: "ACS 2019", group: 1 },
@@ -92,7 +101,18 @@
 
     const Graph = ForceGraph3D()(document.getElementById('3d-graph'))
       .graphData(gData)
-      .nodeAutoColorBy('group');
+      .nodeAutoColorBy('group')
+      .nodeThreeObject(node => {
+        const sprite = new SpriteText(node.id);
+        sprite.material.depthWrite = false; // Make sprite background transparent
+        sprite.color = node.color;
+        sprite.textHeight = 8;
+        return sprite;
+      });
+
+    // Spread nodes a little wider
+    Graph.d3Force('charge').strength(-120);
+
   </script>
 </body>
 </html>
