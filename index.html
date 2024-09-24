@@ -24,6 +24,7 @@
 
     const gData = {
       nodes: [
+        // First-Level Nodes: Datasets
         { id: "ACS 2019", group: 1 },
         { id: "AHS 2019", group: 1 },
         { id: "IPUMS 1940", group: 1 },
@@ -33,6 +34,8 @@
         { id: "Moving to Opportunity", group: 1 },
         { id: "NCVS 2017", group: 1 },
         { id: "NSCH 2020", group: 1 },
+
+        // Second-Level Nodes: Housing-Related Codes
         { id: "HOUSEHOLD SIZE - ACS", group: 2 },
         { id: "HOUSING TYPE - ACS", group: 2 },
         { id: "MORTGAGE - ACS", group: 2 },
@@ -52,6 +55,8 @@
         { id: "HOUSE OWNERSHIP - NCVS", group: 2 },
         { id: "HOUSING STABILITY - NSCH", group: 2 },
         { id: "RENTAL TYPE - NSCH", group: 2 },
+
+        // Third-Level Nodes: Categories
         { id: "Household Size", group: 3 },
         { id: "Mortgage Status", group: 3 },
         { id: "Rental Status", group: 3 },
@@ -62,6 +67,7 @@
         { id: "Housing Stability", group: 3 }
       ],
       links: [
+        // First-Level Nodes: Datasets to Housing-Related Codes
         { source: "ACS 2019", target: "HOUSEHOLD SIZE - ACS" },
         { source: "ACS 2019", target: "HOUSING TYPE - ACS" },
         { source: "ACS 2019", target: "MORTGAGE - ACS" },
@@ -81,6 +87,8 @@
         { source: "NCVS 2017", target: "HOUSE OWNERSHIP - NCVS" },
         { source: "NSCH 2020", target: "HOUSING STABILITY - NSCH" },
         { source: "NSCH 2020", target: "RENTAL TYPE - NSCH" },
+
+        // Second-Level Nodes: Housing-Related Codes to Categories
         { source: "HOUSEHOLD SIZE - ACS", target: "Household Size" },
         { source: "HOUSEHOLD SIZE - AHS", target: "Household Size" },
         { source: "MORTGAGE - ACS", target: "Mortgage Status" },
