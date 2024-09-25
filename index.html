@@ -117,7 +117,94 @@
 //     "demo", // Original Demolition Flag could tie into redevelopment and new construction
 //     "picdemo" // Alternative Demolition Flag also links to new housing development patterns
 //   ]
-// };
+};   
+      const data8 = {
+  "Housing Affordability": [
+    "HHINCOME", // Household Income Class
+    "HHINCOMEA", // Household Income Class (Allocated)
+    "PUBLICHOUSING", // Public Housing Unit
+    "HHWEIGHT" // Household Weight
+  ],
+  "Housing Patterns": [
+    "FAMILYSTRUCTURE", // Family Structure Codes
+    "GATEDWALLEDCOMMUNITY", // Gated or Walled Community
+    "LANDUSE", // Land Use Code
+    "HHSTATUS", // Household Status
+    "HH_TIS", // Household Time in Sample
+    "TENURE", // Tenure Code
+    "TYPEQUARTERS" // Type of Living Quarters (Original)
+  ],
+  "Housing Vacancies and Homeownership": [
+    "NUMBEROFUNITS", // Number of Housing Units in Structure
+    "NUMBEROFADULTS", // Number of Household Members 12 Years and Over
+    "NUMBEROFCHILDREN", // Number of Household Members Under 12 Years
+    "OUTCOME", // Outcome Code from Data Collection Instrument
+    "UNITSTATUS" // Unit Status
+  ],
+  "New Residential Construction": [
+    "FARMSALES", // Farm Sales (Original)
+    "FARMSALESALLOC", // Farm Sales (Allocated)
+    "TYPEQUARTALLOC" // Type of Living Quarters (Allocated)
+  ],
+  "Rental Housing Finance Survey (RHFS)": [
+    "PUBLICHOUSING", // Public Housing Unit
+    "NUMBEROFTYPEZHHMEMBERS", // Number of Type Z Noninterview Household Members
+    "PUBLICHOUSINGMGRVERIFY" // Manager Verification of Public Housing
+  ],
+  "Residential Finance Survey (RFS)": [
+    "BASEWEIGHT", // Base Weight
+    "WEIGHTCONTROL", // Weighting Control Factor
+    "RUNDATE" // Month and Year
+  ]
+};
+    const dataNSCH = {
+  "Housing Affordability": [
+    "ACE1", // Hard to Cover Basics Like Food or Housing
+    "K11Q60", // Cash Assistance from Government - Past 12 Months
+    "K11Q61", // Food Stamps - Past 12 Months
+    "K11Q62", // Free or Reduced Cost Meals - Past 12 Months
+    "FPL_I1", // Family Poverty Ratio, First Implicate
+    "FPL_I2", // Family Poverty Ratio, Second Implicate
+    "FPL_I3", // Family Poverty Ratio, Third Implicate
+    "FPL_I4", // Family Poverty Ratio, Fourth Implicate
+    "FPL_I5", // Family Poverty Ratio, Fifth Implicate
+    "FPL_I6" // Family Poverty Ratio, Sixth Implicate
+  ],
+  "Housing Patterns": [
+    "TENURE", // The Conditions under Which Land or Buildings Are Held or Occupied
+    "FAMILY_R", // Family Structure
+    "HHCOUNT", // Number of People Living at Address
+    "TOTKIDS_R", // Number of Children in Household
+    "TOTFEMALE", // Count of Female Children in Household
+    "TOTMALE", // Count of Male Children in Household
+    "UATYP" // Urban Area Status
+  ],
+  "Housing Vacancies and Homeownership": [
+    "ACE3", // Child Experienced - Parent or Guardian Divorced
+    "ACE5", // Child Experienced - Parent or Guardian Time in Jail
+    "TOTAGE_0_5", // Count of Children Ages 0 to 5 in Household
+    "TOTAGE_6_11", // Count of Children Ages 6 to 11 in Household
+    "TOTAGE_12_17" // Count of Children Ages 12 to 17 in Household
+  ],
+  "New Residential Construction": [
+    // No variables related to New Residential Construction
+  ],
+  "Rental Housing Finance Survey (RHFS)": [
+    // No variables related to RHFS
+  ],
+  "Residential Finance Survey (RFS)": [
+    "FPL_IF", // Imputation Flag for FPL
+    "K11Q03R", // Health Insurance - Indian Health Service
+    "K12Q03", // Health Insurance - Current/Former Employer or Union
+    "K12Q04", // Health Insurance - Insurance Company
+    "K12Q12", // Health Insurance - Government Assistance Plan
+    "K12Q01_A", // Reason Not Covered - Change in Employer/Employment
+    "K12Q01_B", // Reason Not Covered - Cancellation Overdue Premiums
+    "K12Q01_C" // Reason Not Covered - Unaffordable
+  ]
+};
+    
+    
     const datasets = [
       { name: "American Community Survey", data: data1 },
       { name: "American Housing Survey", data: data2 },
@@ -126,6 +213,8 @@
       { name: "Decennial Census", data: data5 },
       { name: "HUD Family Option Study", data: data6 },
       // { name: "HUD Move to Opportunity", data: data7 },
+      { name: "National Crime Victimization Survey", data: data8 },
+      { name: "National Survey of Children's Health", data: data9 },
     ];
     
 
@@ -139,6 +228,9 @@
         { id: "Decennial Census", group: 1 },
         { id: "HUD Family Option Study", group: 1 },
         // { id: "HUD Move to Opportunity, group: 1 },
+        { id: "National Crime Victimization Survey, group: 1 },
+        { id: "National Survey of Children's Health, group: 1 },
+          
       ],
           // Third-Level Nodes (Categories)
         { id: "Housing Affordability", group: 3 },
