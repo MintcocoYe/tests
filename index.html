@@ -101,6 +101,29 @@
     "p78_A6" // Rent paid partly by government
   ]
 };
+    const data7 = {
+  "Housing Affordability": [
+    "addressid", // Created PIC Address ID could indirectly influence affordability if tied to subsidies
+    "any_hopevi" // HOPE VI program, which involved public housing redevelopment
+  ],
+  "Housing Patterns": [
+    "development_number1", // Primary PIC Development Number might reflect certain housing patterns or locations
+    "development_number2"  // Secondary PIC Development Number might also contribute to housing patterns
+  ],
+  "Housing Vacancies and Homeownership": [
+    "dwellid" // MTO Dwelling ID might link to housing vacancies or occupancy
+  ],
+  "New Residential Construction": [
+    "demo", // Original Demolition Flag could tie into redevelopment and new construction
+    "picdemo" // Alternative Demolition Flag also links to new housing development patterns
+  ],
+  "Rental Housing Finance Survey (RHFS)": [
+    // No specific variables identified for RHFS
+  ],
+  "Residential Finance Survey (RFS)": [
+    // No specific variables identified for RFS
+  ]
+};
     const datasets = [
       { name: "American Community Survey", data: data1 },
       { name: "American Housing Survey", data: data2 },
@@ -108,6 +131,7 @@
       { name: "Current Population Survey (CPS)", data: data4 },
       { name: "Decennial Census", data: data5 },
       { name: "HUD Family Option Study", data: data6 },
+      { name: "HUD Move to Opportunity", data: data7 },
     ];
     
 
@@ -120,6 +144,7 @@
         { id: "Current Population Survey (CPS)", group: 1 },
         { id: "Decennial Census", group: 1 },
         { id: "HUD Family Option Study", group: 1 },
+        { id: "HUD Move to Opportunity, group: 1 },
       ],
       links: []
     };
