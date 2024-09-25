@@ -81,25 +81,22 @@
     datasets.forEach(dataset => {
       const { name, data } = dataset;
 
+      // Loop through categories
       Object.keys(data).forEach(category => {
         // Add category nodes
         gData.nodes.push({ id: category, group: 3 });
+
+        // Link dataset to category
+        gData.links.push({ source: name, target: category, value: 5 });
 
         data[category].forEach(code => {
           if (!uniqueCodes.has(code)) {
             uniqueCodes.add(code);
             // Add code node
             gData.nodes.push({ id: code, group: 2 });
-
-            // Link from dataset to code
-            gData.links.push({ source: name, target: code, value: 1 });
-
-            // Link from category to code
-            gData.links.push({ source: category, target: code, value: 5 });
-          } else {
-            // If the code exists, just link the category to the existing code
-            gData.links.push({ source: category, target: code, value: 5 });
           }
+          // Create links between category and code
+          gData.links.push({ source: category, target: code, value: 1 });
         });
       });
     });
@@ -119,8 +116,8 @@
       });
 
     // Adjust node strength and distances
-    Graph.d3Force('charge').strength(-50);
-    Graph.d3Force('link').distance(50);
+    Graph.d3Force('charge').strength(-100);  // Adjusted to spread nodes apart
+    Graph.d3Force('link').distance(100);     // Increased distance to spread links further
   </script>
 </body>
 </html>
