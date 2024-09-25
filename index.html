@@ -212,11 +212,9 @@
       { name: "Current Population Survey (CPS)", data: data4 },
       { name: "Decennial Census", data: data5 },
       { name: "HUD Family Option Study", data: data6 },
-      // { name: "HUD Move to Opportunity", data: data7 },
       { name: "National Crime Victimization Survey", data: data8 },
-      { name: "National Survey of Children's Health", data: data9 },
+      { name: "National Survey of Children's Health", data: data9 }
     ];
-    
 
     const gData = {
       nodes: [
@@ -227,43 +225,46 @@
         { id: "Current Population Survey (CPS)", group: 1 },
         { id: "Decennial Census", group: 1 },
         { id: "HUD Family Option Study", group: 1 },
-        // { id: "HUD Move to Opportunity", group: 1 },
         { id: "National Crime Victimization Survey", group: 1 },
         { id: "National Survey of Children's Health", group: 1 },
           
-      ],
-          // Third-Level Nodes (Categories)
+        // Category nodes (added separately to avoid duplication in the loop)
         { id: "Housing Affordability", group: 3 },
         { id: "Housing Patterns", group: 3 },
         { id: "Housing Vacancies and Homeownership", group: 3 },
         { id: "New Residential Construction", group: 3 },
         { id: "Rental Housing Finance Survey (RHFS)", group: 3 },
         { id: "Residential Finance Survey (RFS)", group: 3 }
-  ],
+      ],
       links: []
     };
 
-   // Loop through each dataset and populate nodes and links dynamically
-datasets.forEach(dataset => {
-  const { name, data } = dataset;
+    // Track unique codes to avoid duplication
+    const uniqueCodes = new Set();
 
-  // Loop through the categories within each dataset
-  Object.keys(data).forEach(category => {
-    data[category].forEach(code => {
-      // Add second-level nodes for each code
-      gData.nodes.push({ id: code, group: 2 });
+    // Loop through each dataset and populate nodes and links
+    datasets.forEach(dataset => {
+      const { name, data } = dataset;
 
-      // Create a link from the dataset to the code
-      gData.links.push({ source: name, target: code, value: 1 });
+      // Link dataset to category
+      Object.keys(data).forEach(category => {
+        // Link dataset to category
+        gData.links.push({ source: name, target: category, value: 5 });
 
-      // Create a link from the code to the category
-      gData.links.push({ source: category, target: code, value: 5 });
+        // Loop through the codes in each category
+        data[category].forEach(code => {
+          if (!uniqueCodes.has(code)) {
+            uniqueCodes.add(code);  // Avoid duplicates
+            gData.nodes.push({ id: code, group: 2 }); // Add code node
+          }
+          // Link category to code
+          gData.links.push({ source: category, target: code, value: 1 });
+        });
+      });
     });
-  });
-});
 
-// Log the final graph data structure (for debugging)
-console.log(gData);
+    // Log the final graph data structure (for debugging)
+    console.log(gData);
    
     const Graph = ForceGraph3D()(document.getElementById('3d-graph'))
       .graphData(gData)
@@ -276,9 +277,9 @@ console.log(gData);
         return sprite;
       });
 
-    // Strengthen the connections and bring nodes closer
-    Graph.d3Force('charge').strength(-50);  // Smaller negative charge for closer nodes
-    Graph.d3Force('link').distance(50);     // Reduce link distance to bring nodes together
+    // Adjust node strength and distances
+    Graph.d3Force('charge').strength(-100);  // Spread nodes apart
+    Graph.d3Force('link').distance(80);      // Adjust distance between nodes
   </script>
 </body>
-</html>     
+</html>
