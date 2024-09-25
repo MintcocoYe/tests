@@ -1,4 +1,4 @@
-  <!DOCTYPE html>
+<!DOCTYPE html>
 <html lang="en">
 <head>
   <meta charset="UTF-8">
@@ -22,93 +22,90 @@
   <script type="module">
     import SpriteText from "//unpkg.com/three-spritetext/dist/three-spritetext.mjs";
 
-
     const data1 = {
-  "Housing Affordability": ["AHINC", "FINC", "GRNT", "RNT", "SMOC", "MRG", "MRGT", "MRGX", "GRPI", "OCPI"],
-  "Housing Patterns": ["BDS", "RMS", "NP", "NPF", "NOC", "R18", "R60", "R65", "MULTG", "HFL", "HHLDRACE", "HHLDRAGE", "HHLDSCHL"],
-  "Housing Vacancies and Homeownership": ["VACS", "TEN", "HINC", "VAL", "FMRGX", "FMRGT"],
-  "New Residential Construction": ["BATH", "KIT", "PLM", "RMS", "YBL", "MVY", "ELE", "GAS", "WAT", "BLD", "SMXH", "SMXS"],
-  "Rental Housing Finance Survey (RHFS)": ["GRNT", "RNT", "GRPI", "SMOC", "MRG", "RNTM", "SRNT"],
-  "Residential Finance Survey (RFS)": ["MRG", "MRGT", "MRGI", "MRGX", "SMOC", "SMXH", "SMXS", "VAL"]
-};
+      "Housing Affordability": ["AHINC", "FINC", "GRNT", "RNT", "SMOC", "MRG", "MRGT", "MRGX", "GRPI", "OCPI"],
+      "Housing Patterns": ["BDS", "RMS", "NP", "NPF", "NOC", "R18", "R60", "R65", "MULTG", "HFL", "HHLDRACE", "HHLDRAGE", "HHLDSCHL"],
+      "Housing Vacancies and Homeownership": ["VACS", "TEN", "HINC", "VAL", "FMRGX", "FMRGT"],
+      "New Residential Construction": ["BATH", "KIT", "PLM", "RMS", "YBL", "MVY", "ELE", "GAS", "WAT", "BLD", "SMXH", "SMXS"],
+      "Rental Housing Finance Survey (RHFS)": ["GRNT", "RNT", "GRPI", "SMOC", "MRG", "RNTM", "SRNT"],
+      "Residential Finance Survey (RFS)": ["MRG", "MRGT", "MRGI", "MRGX", "SMOC", "SMXH", "SMXS", "VAL"]
+    };
     const data2 = {
-  "Housing Affordability": ["AMI", "FS", "FSAFFORD", "FSLAST", "FSLOSTWGT", "FSMEALDAYS", "FSNODAYS", "FSNOFOOD", "FSSKIPMEAL", "FSSTATUS", "FSWORRY", "RENT", "MORTAMT", "RENTCNTRL", "RENTSUB"],
-  "Housing Patterns": ["HHMOVE", "HHYNGKIDS", "HHOLDKIDS", "SAMEHHLD", "HHAGE", "HHGRAD", "HHRACE", "HHRACEAS", "HHRACEPI", "HHSEX", "HHSPAN"],
-  "Housing Vacancies and Homeownership": ["VACANCY", "VACMONTHS", "VACINHER", "VACINVEST", "VACOTH", "VACPRIRES", "VACREC", "VACRESDAYS", "VACRNTDAYS", "VACSELL"],
-  "New Residential Construction": ["YRBUILT", "YRBUILT_IUF", "STORIES", "STORIES_IUF", "LOTSIZE", "LOTVAL"],
-  "Rental Housing Finance Survey (RHFS)": ["RENT", "RENTCNTRL", "RENTSUB", "TOTBALAMT", "TOTHCAMT"],
-  "Residential Finance Survey (RFS)": ["MORTAMT", "TOTBALAMT", "PROTAXAMT", "INSURAMT", "DWNPAYPCT", "DWNPAYSRC"]
-};
+      "Housing Affordability": ["AMI", "FS", "FSAFFORD", "FSLAST", "FSLOSTWGT", "FSMEALDAYS", "FSNODAYS", "FSNOFOOD", "FSSKIPMEAL", "FSSTATUS", "FSWORRY", "RENT", "MORTAMT", "RENTCNTRL", "RENTSUB"],
+      "Housing Patterns": ["HHMOVE", "HHYNGKIDS", "HHOLDKIDS", "SAMEHHLD", "HHAGE", "HHGRAD", "HHRACE", "HHRACEAS", "HHRACEPI", "HHSEX", "HHSPAN"],
+      "Housing Vacancies and Homeownership": ["VACANCY", "VACMONTHS", "VACINHER", "VACINVEST", "VACOTH", "VACPRIRES", "VACREC", "VACRESDAYS", "VACRNTDAYS", "VACSELL"],
+      "New Residential Construction": ["YRBUILT", "YRBUILT_IUF", "STORIES", "STORIES_IUF", "LOTSIZE", "LOTVAL"],
+      "Rental Housing Finance Survey (RHFS)": ["RENT", "RENTCNTRL", "RENTSUB", "TOTBALAMT", "TOTHCAMT"],
+      "Residential Finance Survey (RFS)": ["MORTAMT", "TOTBALAMT", "PROTAXAMT", "INSURAMT", "DWNPAYPCT", "DWNPAYSRC"]
+    };
     const data3 = {
-  "Housing Affordability": ["RENT", "VALUEH", "US1940B_0081", "US1940B_0082"],
-  "Housing Patterns": ["CITY", "COUNTY", "STATEFIP", "STATEICP", "URBAN", "REGION", "NUMPERHH", "OWNERSHP"],
-  "Housing Vacancies and Homeownership": ["VACANCY", "NUMPREC", "NUMPREC40", "US1940B_0037", "US1940B_0049"],
-  "New Residential Construction": ["DWELLING", "DWSEQ", "DWSIZE", "US1940B_0030", "US1940B_0031"],
-  "Rental Housing Finance Survey (RHFS)": ["RENT", "US1940B_0082"],
-  "Residential Finance Survey (RFS)": ["VALUEH", "MORTAMT"]
-};
+      "Housing Affordability": ["RENT", "VALUEH", "US1940B_0081", "US1940B_0082"],
+      "Housing Patterns": ["CITY", "COUNTY", "STATEFIP", "STATEICP", "URBAN", "REGION", "NUMPERHH", "OWNERSHP"],
+      "Housing Vacancies and Homeownership": ["VACANCY", "NUMPREC", "NUMPREC40", "US1940B_0037", "US1940B_0049"],
+      "New Residential Construction": ["DWELLING", "DWSEQ", "DWSIZE", "US1940B_0030", "US1940B_0031"],
+      "Rental Housing Finance Survey (RHFS)": ["RENT", "US1940B_0082"],
+      "Residential Finance Survey (RFS)": ["VALUEH", "MORTAMT"]
+    };
     const data4 = {
-  "Housing Affordability": ["FRECORD", "FRNTVAL", "FPAWVAL", "FINC_RNT", "FINC_PAW", "FINC_SE", "FINC_WS", "FSUP_WGT", "FPENVAL", "FMED_VAL"],
-  "Housing Patterns": ["FAGEU18", "FKIND", "FKINDEX", "FOWNU6", "FOWNU18", "FOWNU23", "FSPANISH", "FSEQ", "HSEQ", "NUM_BRMS"],
-  "Housing Vacancies and Homeownership": ["FSURVAL", "FANNVAL", "FPCTCUT", "FPENVAL", "FSPOUIDX"],
-  "New Residential Construction": ["NUM_BRMS", "FH_SEQ", "H_SEQ", "FSUP_WGT", "NUM_BRMS"],
-  "Rental Housing Finance Survey (RHFS)": ["FRNTVAL", "FRECORD", "FPCTCUT", "FPAWVAL"],
-  "Residential Finance Survey (RFS)": ["FMOOP", "FMOOP2", "FSVAL", "FSSEVAL", "FPENVAL", "FVETVAL"]
-};
+      "Housing Affordability": ["FRECORD", "FRNTVAL", "FPAWVAL", "FINC_RNT", "FINC_PAW", "FINC_SE", "FINC_WS", "FSUP_WGT", "FPENVAL", "FMED_VAL"],
+      "Housing Patterns": ["FAGEU18", "FKIND", "FKINDEX", "FOWNU6", "FOWNU18", "FOWNU23", "FSPANISH", "FSEQ", "HSEQ", "NUM_BRMS"],
+      "Housing Vacancies and Homeownership": ["FSURVAL", "FANNVAL", "FPCTCUT", "FPENVAL", "FSPOUIDX"],
+      "New Residential Construction": ["NUM_BRMS", "FH_SEQ", "H_SEQ", "FSUP_WGT", "NUM_BRMS"],
+      "Rental Housing Finance Survey (RHFS)": ["FRNTVAL", "FRECORD", "FPCTCUT", "FPAWVAL"],
+      "Residential Finance Survey (RFS)": ["FMOOP", "FMOOP2", "FSVAL", "FSSEVAL", "FPENVAL", "FVETVAL"]
+    };
     const datasets = [
-  { name: "American Community Survey", data: data1 },
-  { name: "American Housing Survey", data: data2 },
-  { name: "IPUMS 1940 Research", data: data3 },
-  { name: "Current Population Survey (CPS)", data: data4 },
-];
+      { name: "American Community Survey", data: data1 },
+      { name: "American Housing Survey", data: data2 },
+      { name: "IPUMS 1940 Research", data: data3 },
+      { name: "Current Population Survey (CPS)", data: data4 },
+    ];
 
-const gData = {
-  nodes: [
-    // First-Level Nodes (Datasets)
-    { id: "American Community Survey", group: 1 },
-    { id: "American Housing Survey", group: 1 },
-    // Add other dataset nodes
-    { id: "IPUMS 1940", group: 1 },
-    { id: "CPS", group: 1 },
-    { id: "Decennial Census 2010", group: 1 },
-    { id: "Family Options Study", group: 1 },
-    { id: "Moving to Opportunity", group: 1 },
-    { id: "NCVS 2017", group: 1 },
-    { id: "NSCH 2020", group: 1 },
+    const gData = {
+      nodes: [
+        // First-Level Nodes (Datasets)
+        { id: "American Community Survey", group: 1 },
+        { id: "American Housing Survey", group: 1 },
+        { id: "IPUMS 1940", group: 1 },
+        { id: "CPS", group: 1 },
+      ],
+      links: []
+    };
 
-    // Third-Level Nodes (Categories)
-    { id: "Housing Affordability", group: 3 },
-    { id: "Housing Patterns", group: 3 },
-    { id: "Housing Vacancies and Homeownership", group: 3 },
-    { id: "New Residential Construction", group: 3 },
-    { id: "Rental Housing Finance Survey (RHFS)", group: 3 },
-    { id: "Residential Finance Survey (RFS)", group: 3 }
-  ],
-  links: []
-};
+    // Track unique codes to prevent duplication
+    const uniqueCodes = new Set();
 
-// Loop through each dataset and populate nodes and links dynamically
-datasets.forEach(dataset => {
-  const { name, data } = dataset;
+    // Loop through each dataset and populate nodes and links dynamically
+    datasets.forEach(dataset => {
+      const { name, data } = dataset;
 
-  // Loop through the categories within each dataset
-  Object.keys(data).forEach(category => {
-    data[category].forEach(code => {
-      // Add second-level nodes for each code
-      gData.nodes.push({ id: code, group: 2 });
+      // Loop through the categories within each dataset
+      Object.keys(data).forEach(category => {
+        // Add third-level nodes (Categories)
+        gData.nodes.push({ id: category, group: 3 });
 
-      // Create a link from the dataset to the code
-      gData.links.push({ source: name, target: code, value: 1 });
+        data[category].forEach(code => {
+          // Only add unique codes to avoid duplication
+          if (!uniqueCodes.has(code)) {
+            uniqueCodes.add(code); // Mark code as added
+            gData.nodes.push({ id: code, group: 2 });
 
-      // Create a link from the code to the category
-      gData.links.push({ source: category, target: code, value: 5 });
+            // Create a link from the dataset to the code
+            gData.links.push({ source: name, target: code, value: 1 });
+
+            // Create a link from the category to the code
+            gData.links.push({ source: category, target: code, value: 5 });
+          } else {
+            // Create a link from the category to the existing code (if it's already added)
+            gData.links.push({ source: category, target: code, value: 5 });
+          }
+        });
+      });
     });
-  });
-});
 
-// Log the final graph data structure (for debugging)
-console.log(gData);
-   
+    // Log the final graph data structure (for debugging)
+    console.log(gData);
+
     const Graph = ForceGraph3D()(document.getElementById('3d-graph'))
       .graphData(gData)
       .nodeAutoColorBy('group')
@@ -125,4 +122,4 @@ console.log(gData);
     Graph.d3Force('link').distance(50);     // Reduce link distance to bring nodes together
   </script>
 </body>
-</html>     
+</html>
