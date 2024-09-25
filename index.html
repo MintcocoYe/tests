@@ -149,7 +149,7 @@
       links: []
     };
 
-        const uniqueCodes = new Set();  // Track unique codes
+const uniqueCodes = new Set();  // Track unique codes
 
     datasets.forEach(dataset => {
       const { name, data } = dataset;
@@ -159,7 +159,7 @@
         const codes = data[category];
 
         // Only proceed if the category has codes
-        if (codes.length > 0) {
+        if (codes && codes.length > 0) {
           // Add category node
           gData.nodes.push({ id: category, group: 3 });
 
