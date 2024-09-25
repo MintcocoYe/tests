@@ -116,12 +116,6 @@
   "New Residential Construction": [
     "demo", // Original Demolition Flag could tie into redevelopment and new construction
     "picdemo" // Alternative Demolition Flag also links to new housing development patterns
-  ],
-  "Rental Housing Finance Survey (RHFS)": [
-    // No specific variables identified for RHFS
-  ],
-  "Residential Finance Survey (RFS)": [
-    // No specific variables identified for RFS
   ]
 };
     const datasets = [
@@ -149,41 +143,28 @@
       links: []
     };
 
-    const uniqueCodes = new Set();  // Track unique codes
+   // Loop through each dataset and populate nodes and links dynamically
+datasets.forEach(dataset => {
+  const { name, data } = dataset;
 
-    datasets.forEach(dataset => {
-      const { name, data } = dataset;
+  // Loop through the categories within each dataset
+  Object.keys(data).forEach(category => {
+    data[category].forEach(code => {
+      // Add second-level nodes for each code
+      gData.nodes.push({ id: code, group: 2 });
 
-      // Loop through categories
-      Object.keys(data).forEach(category => {
-        const codes = data[category];
+      // Create a link from the dataset to the code
+      gData.links.push({ source: name, target: code, value: 1 });
 
-        // Only proceed if the category has codes and is not empty
-        if (codes && codes.length > 0) {
-          // Add category node
-          gData.nodes.push({ id: category, group: 3 });
-
-          // Link dataset to category
-          gData.links.push({ source: name, target: category, value: 5 });
-
-          // Loop through each code in the category
-          codes.forEach(code => {
-            if (!uniqueCodes.has(code)) {
-              uniqueCodes.add(code);
-              // Add code node
-              gData.nodes.push({ id: code, group: 2 });
-            }
-
-            // Create links between category and code
-            gData.links.push({ source: category, target: code, value: 1 });
-          });
-        }
-      });
+      // Create a link from the code to the category
+      gData.links.push({ source: category, target: code, value: 5 });
     });
+  });
+});
 
-    // Log the final graph data structure (for debugging)
-    console.log(gData);
-
+// Log the final graph data structure (for debugging)
+console.log(gData);
+   
     const Graph = ForceGraph3D()(document.getElementById('3d-graph'))
       .graphData(gData)
       .nodeAutoColorBy('group')
@@ -191,13 +172,13 @@
         const sprite = new SpriteText(node.id);
         sprite.material.depthWrite = false; // Make sprite background transparent
         sprite.color = node.color;
-        sprite.textHeight = 5;
+        sprite.textHeight = 5; // Smaller text to make it more readable
         return sprite;
       });
 
-    // Adjust node strength and distances
-    Graph.d3Force('charge').strength(-100);  // Adjusted to spread nodes apart
-    Graph.d3Force('link').distance(100);     // Increased distance to spread links further
+    // Strengthen the connections and bring nodes closer
+    Graph.d3Force('charge').strength(-50);  // Smaller negative charge for closer nodes
+    Graph.d3Force('link').distance(50);     // Reduce link distance to bring nodes together
   </script>
 </body>
-</html>
+</html>     
