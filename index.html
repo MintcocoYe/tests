@@ -30,6 +30,7 @@
       "Rental Housing Finance Survey (RHFS)": ["GRNT", "RNT", "GRPI", "SMOC", "MRG", "RNTM", "SRNT"],
       "Residential Finance Survey (RFS)": ["MRG", "MRGT", "MRGI", "MRGX", "SMOC", "SMXH", "SMXS", "VAL"]
     };
+
     const data2 = {
       "Housing Affordability": ["AMI", "FS", "FSAFFORD", "FSLAST", "FSLOSTWGT", "FSMEALDAYS", "FSNODAYS", "FSNOFOOD", "FSSKIPMEAL", "FSSTATUS", "FSWORRY", "RENT", "MORTAMT", "RENTCNTRL", "RENTSUB"],
       "Housing Patterns": ["HHMOVE", "HHYNGKIDS", "HHOLDKIDS", "SAMEHHLD", "HHAGE", "HHGRAD", "HHRACE", "HHRACEAS", "HHRACEPI", "HHSEX", "HHSPAN"],
@@ -38,6 +39,7 @@
       "Rental Housing Finance Survey (RHFS)": ["RENT", "RENTCNTRL", "RENTSUB", "TOTBALAMT", "TOTHCAMT"],
       "Residential Finance Survey (RFS)": ["MORTAMT", "TOTBALAMT", "PROTAXAMT", "INSURAMT", "DWNPAYPCT", "DWNPAYSRC"]
     };
+
     const data3 = {
       "Housing Affordability": ["RENT", "VALUEH", "US1940B_0081", "US1940B_0082"],
       "Housing Patterns": ["CITY", "COUNTY", "STATEFIP", "STATEICP", "URBAN", "REGION", "NUMPERHH", "OWNERSHP"],
@@ -46,6 +48,7 @@
       "Rental Housing Finance Survey (RHFS)": ["RENT", "US1940B_0082"],
       "Residential Finance Survey (RFS)": ["VALUEH", "MORTAMT"]
     };
+
     const data4 = {
       "Housing Affordability": ["FRECORD", "FRNTVAL", "FPAWVAL", "FINC_RNT", "FINC_PAW", "FINC_SE", "FINC_WS", "FSUP_WGT", "FPENVAL", "FMED_VAL"],
       "Housing Patterns": ["FAGEU18", "FKIND", "FKINDEX", "FOWNU6", "FOWNU18", "FOWNU23", "FSPANISH", "FSEQ", "HSEQ", "NUM_BRMS"],
@@ -54,6 +57,7 @@
       "Rental Housing Finance Survey (RHFS)": ["FRNTVAL", "FRECORD", "FPCTCUT", "FPAWVAL"],
       "Residential Finance Survey (RFS)": ["FMOOP", "FMOOP2", "FSVAL", "FSSEVAL", "FPENVAL", "FVETVAL"]
     };
+
     const datasets = [
       { name: "American Community Survey", data: data1 },
       { name: "American Housing Survey", data: data2 },
@@ -63,47 +67,44 @@
 
     const gData = {
       nodes: [
-        // First-Level Nodes (Datasets)
+        // Dataset nodes
         { id: "American Community Survey", group: 1 },
         { id: "American Housing Survey", group: 1 },
-        { id: "IPUMS 1940", group: 1 },
-        { id: "CPS", group: 1 },
+        { id: "IPUMS 1940 Research", group: 1 },
+        { id: "Current Population Survey (CPS)", group: 1 },
       ],
       links: []
     };
 
-    // Track unique codes to prevent duplication
-    const uniqueCodes = new Set();
+    const uniqueCodes = new Set();  // Track unique codes
 
-    // Loop through each dataset and populate nodes and links dynamically
     datasets.forEach(dataset => {
       const { name, data } = dataset;
 
-      // Loop through the categories within each dataset
       Object.keys(data).forEach(category => {
-        // Add third-level nodes (Categories)
+        // Add category nodes
         gData.nodes.push({ id: category, group: 3 });
 
         data[category].forEach(code => {
-          // Only add unique codes to avoid duplication
           if (!uniqueCodes.has(code)) {
-            uniqueCodes.add(code); // Mark code as added
+            uniqueCodes.add(code);
+            // Add code node
             gData.nodes.push({ id: code, group: 2 });
 
-            // Create a link from the dataset to the code
+            // Link from dataset to code
             gData.links.push({ source: name, target: code, value: 1 });
 
-            // Create a link from the category to the code
+            // Link from category to code
             gData.links.push({ source: category, target: code, value: 5 });
           } else {
-            // Create a link from the category to the existing code (if it's already added)
+            // If the code exists, just link the category to the existing code
             gData.links.push({ source: category, target: code, value: 5 });
           }
         });
       });
     });
 
-    // Log the final graph data structure (for debugging)
+    // Log the final graph data structure for debugging
     console.log(gData);
 
     const Graph = ForceGraph3D()(document.getElementById('3d-graph'))
@@ -113,13 +114,13 @@
         const sprite = new SpriteText(node.id);
         sprite.material.depthWrite = false; // Make sprite background transparent
         sprite.color = node.color;
-        sprite.textHeight = 5; // Smaller text to make it more readable
+        sprite.textHeight = 5;
         return sprite;
       });
 
-    // Strengthen the connections and bring nodes closer
-    Graph.d3Force('charge').strength(-50);  // Smaller negative charge for closer nodes
-    Graph.d3Force('link').distance(50);     // Reduce link distance to bring nodes together
+    // Adjust node strength and distances
+    Graph.d3Force('charge').strength(-50);
+    Graph.d3Force('link').distance(50);
   </script>
 </body>
 </html>
