@@ -57,12 +57,21 @@
       "Rental Housing Finance Survey (RHFS)": ["FRNTVAL", "FRECORD", "FPCTCUT", "FPAWVAL"],
       "Residential Finance Survey (RFS)": ["FMOOP", "FMOOP2", "FSVAL", "FSSEVAL", "FPENVAL", "FVETVAL"]
     };
+    const data5 = {
+  "Housing Affordability": ["HOUSING", "RENT", "VACS", "FVACS"],
+  "Housing Patterns": ["CURCOUNTY", "CURSTATE", "REGIONCE", "URBAN", "UACE", "AIANNHCE", "AIANNHFP", "AIANNHNS", "MULTG", "NOCH", "P18", "P60", "P65", "PAOC", "PARC", "NPF", "NRC"],
+  "Housing Vacancies and Homeownership": ["OWNERSHP", "TEN", "TEN_A", "TEN_R", "XTEN", "XVACS", "VACINHER", "VACOTH"],
+  "New Residential Construction": ["BLD", "ENUMT", "AREALAND", "AREAWATER", "AREAWATERCSTL", "AREAWATERGRLK", "AREAWATERINLD", "AREAWATERTSEA", "TTRACTCE"],
+  "Rental Housing Finance Survey (RHFS)": ["RENT", "RENTCNTRL", "RENTSUB", "FVACS"],
+  "Residential Finance Survey (RFS)": ["MORTAMT", "PROTAXAMT", "INSURAMT", "DWNPAYPCT", "DWNPAYSRC", "LOTVAL"]
+};
 
     const datasets = [
       { name: "American Community Survey", data: data1 },
       { name: "American Housing Survey", data: data2 },
       { name: "IPUMS 1940 Research", data: data3 },
       { name: "Current Population Survey (CPS)", data: data4 },
+      { name: "Decennial Census", data: data5 },
     ];
 
     const gData = {
@@ -72,6 +81,7 @@
         { id: "American Housing Survey", group: 1 },
         { id: "IPUMS 1940 Research", group: 1 },
         { id: "Current Population Survey (CPS)", group: 1 },
+        { id: "Decennial Census", group: 1 },
       ],
       links: []
     };
