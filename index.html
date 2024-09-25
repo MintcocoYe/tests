@@ -159,15 +159,29 @@
         // Add category nodes
         gData.nodes.push({ id: category, group: 3 });
 
-        // Link dataset to category
-        gData.links.push({ source: name, target: category, value: 5 });
+// Loop through each dataset and populate nodes and links dynamically
+datasets.forEach(dataset => {
+  const { name, data } = dataset;
 
-        data[category].forEach(code => {
-          if (!uniqueCodes.has(code)) {
-            uniqueCodes.add(code);
-            // Add code node
-            gData.nodes.push({ id: code, group: 2 });
-          }
+  // Track unique codes to avoid duplicates
+  const uniqueCodes = new Set();
+
+  // Loop through the categories within each dataset
+  Object.keys(data).forEach(category => {
+    const codes = data[category];
+
+    // Only proceed if the category has codes
+    if (codes.length > 0) {
+      // Link dataset to category
+      gData.links.push({ source: name, target: category, value: 5 });
+
+      // Loop through each code in the category
+      codes.forEach(code => {
+        if (!uniqueCodes.has(code)) {
+          uniqueCodes.add(code);
+          // Add code node
+          gData.nodes.push({ id: code, group: 2 });
+        }
           // Create links between category and code
           gData.links.push({ source: category, target: code, value: 1 });
         });
