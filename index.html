@@ -39,10 +39,27 @@
   "Rental Housing Finance Survey (RHFS)": ["RENT", "RENTCNTRL", "RENTSUB", "TOTBALAMT", "TOTHCAMT"],
   "Residential Finance Survey (RFS)": ["MORTAMT", "TOTBALAMT", "PROTAXAMT", "INSURAMT", "DWNPAYPCT", "DWNPAYSRC"]
 };
+    const data3 = {
+  "Housing Affordability": ["RENT", "VALUEH", "US1940B_0081", "US1940B_0082"],
+  "Housing Patterns": ["CITY", "COUNTY", "STATEFIP", "STATEICP", "URBAN", "REGION", "NUMPERHH", "OWNERSHP"],
+  "Housing Vacancies and Homeownership": ["VACANCY", "NUMPREC", "NUMPREC40", "US1940B_0037", "US1940B_0049"],
+  "New Residential Construction": ["DWELLING", "DWSEQ", "DWSIZE", "US1940B_0030", "US1940B_0031"],
+  "Rental Housing Finance Survey (RHFS)": ["RENT", "US1940B_0082"],
+  "Residential Finance Survey (RFS)": ["VALUEH", "MORTAMT"]
+};
+    const data4 = {
+  "Housing Affordability": ["FRECORD", "FRNTVAL", "FPAWVAL", "FINC_RNT", "FINC_PAW", "FINC_SE", "FINC_WS", "FSUP_WGT", "FPENVAL", "FMED_VAL"],
+  "Housing Patterns": ["FAGEU18", "FKIND", "FKINDEX", "FOWNU6", "FOWNU18", "FOWNU23", "FSPANISH", "FSEQ", "HSEQ", "NUM_BRMS"],
+  "Housing Vacancies and Homeownership": ["FSURVAL", "FANNVAL", "FPCTCUT", "FPENVAL", "FSPOUIDX"],
+  "New Residential Construction": ["NUM_BRMS", "FH_SEQ", "H_SEQ", "FSUP_WGT", "NUM_BRMS"],
+  "Rental Housing Finance Survey (RHFS)": ["FRNTVAL", "FRECORD", "FPCTCUT", "FPAWVAL"],
+  "Residential Finance Survey (RFS)": ["FMOOP", "FMOOP2", "FSVAL", "FSSEVAL", "FPENVAL", "FVETVAL"]
+};
     const datasets = [
   { name: "American Community Survey", data: data1 },
   { name: "American Housing Survey", data: data2 },
-  // Add other datasets here: { name: "IPUMS 1940", data: data3 }, etc.
+  { name: "IPUMS 1940 Research", data: data3 },
+  { name: "Current Population Survey (CPS)", data: data4 },
 ];
 
 const gData = {
