@@ -149,46 +149,39 @@
       links: []
     };
 
-    const uniqueCodes = new Set();  // Track unique codes
+        const uniqueCodes = new Set();  // Track unique codes
 
     datasets.forEach(dataset => {
       const { name, data } = dataset;
 
       // Loop through categories
       Object.keys(data).forEach(category => {
-        // Add category nodes
-        gData.nodes.push({ id: category, group: 3 });
+        const codes = data[category];
 
-// Loop through each dataset and populate nodes and links dynamically
-datasets.forEach(dataset => {
-  const { name, data } = dataset;
+        // Only proceed if the category has codes
+        if (codes.length > 0) {
+          // Add category node
+          gData.nodes.push({ id: category, group: 3 });
 
-  // Track unique codes to avoid duplicates
-  const uniqueCodes = new Set();
+          // Link dataset to category
+          gData.links.push({ source: name, target: category, value: 5 });
 
-  // Loop through the categories within each dataset
-  Object.keys(data).forEach(category => {
-    const codes = data[category];
+          // Loop through each code in the category
+          codes.forEach(code => {
+            if (!uniqueCodes.has(code)) {
+              uniqueCodes.add(code);
+              // Add code node
+              gData.nodes.push({ id: code, group: 2 });
+            }
 
-    // Only proceed if the category has codes
-    if (codes.length > 0) {
-      // Link dataset to category
-      gData.links.push({ source: name, target: category, value: 5 });
-
-      // Loop through each code in the category
-      codes.forEach(code => {
-        if (!uniqueCodes.has(code)) {
-          uniqueCodes.add(code);
-          // Add code node
-          gData.nodes.push({ id: code, group: 2 });
+            // Create links between category and code
+            gData.links.push({ source: category, target: code, value: 1 });
+          });
         }
-          // Create links between category and code
-          gData.links.push({ source: category, target: code, value: 1 });
-        });
       });
     });
 
-    // Log the final graph data structure for debugging
+    // Log the final graph data structure (for debugging)
     console.log(gData);
 
     const Graph = ForceGraph3D()(document.getElementById('3d-graph'))
