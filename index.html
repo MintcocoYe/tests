@@ -65,14 +65,51 @@
   "Rental Housing Finance Survey (RHFS)": ["RENT", "RENTCNTRL", "RENTSUB", "FVACS"],
   "Residential Finance Survey (RFS)": ["MORTAMT", "PROTAXAMT", "INSURAMT", "DWNPAYPCT", "DWNPAYSRC", "LOTVAL"]
 };
-
+    const data6 = {
+  "Housing Affordability": [
+    "p78_A5", // Do you currently receive any governmental housing assistance?
+    "p78_A6", // Are you paying lower rent because of government assistance?
+    "p78_A6B", // Is this assistance a Section 8 or Housing Choice Voucher?
+    "p78_A12_5", // Received a Rent Subsidy in the last 6 months
+    "p78_A12_4" // Received Temporary Rental Assistance
+  ],
+  "Housing Patterns": [
+    "p78_A3a", // Current living situation: House or Apartment owned/rented
+    "p78_A3b", // Current living situation: Partner's Place
+    "p78_A3c", // Current living situation: Friend or relative's house, paying rent
+    "p78_A3d" // Current living situation: Friend or relative's house, not paying rent
+  ],
+  "Housing Vacancies and Homeownership": [
+    "p78_A11", // Participated in any other housing program in the past 6 months
+    "p78_A9", // Lived with friends/relatives because couldn't afford own place in the last 6 months
+    "p78_A12_1", // Spent a night in a shelter in the last 6 months
+    "p78_A12_2" // Participated in Permanent Supportive Housing Program in the last 6 months
+  ],
+  "New Residential Construction": [
+    "p78_A3f", // Current living situation: Transitional Housing Program
+    "p78_A3e", // Current living situation: Permanent Housing Program
+    "p78_A4A3" // How long lived in this place (months)
+  ],
+  "Rental Housing Finance Survey (RHFS)": [
+    "p78_A6B", // Section 8/Housing Choice Voucher/Public Housing
+    "p78_A12_5", // Rent Subsidy received
+    "p78_A12_4" // Temporary Rental Assistance received
+  ],
+  "Residential Finance Survey (RFS)": [
+    "p78_A3a", // Own or Rent House/Apartment
+    "p78_A5", // Government Housing Assistance
+    "p78_A6" // Rent paid partly by government
+  ]
+};
     const datasets = [
       { name: "American Community Survey", data: data1 },
       { name: "American Housing Survey", data: data2 },
       { name: "IPUMS 1940 Research", data: data3 },
       { name: "Current Population Survey (CPS)", data: data4 },
       { name: "Decennial Census", data: data5 },
+      { name: "HUD Family Option Study", data: data6 },
     ];
+    
 
     const gData = {
       nodes: [
@@ -82,6 +119,7 @@
         { id: "IPUMS 1940 Research", group: 1 },
         { id: "Current Population Survey (CPS)", group: 1 },
         { id: "Decennial Census", group: 1 },
+        { id: "HUD Family Option Study", group: 1 },
       ],
       links: []
     };
