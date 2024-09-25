@@ -22,177 +22,76 @@
   <script type="module">
     import SpriteText from "//unpkg.com/three-spritetext/dist/three-spritetext.mjs";
 
-    const gData = {
-      "nodes": [
-        // First-Level Nodes (Datasets)
-        {"id": "American Community Survey", "group": 1},
 
-        // Second-Level Nodes (Codes)
-        {"id": "AHINC", "group": 2},
-        {"id": "FINC", "group": 2},
-        {"id": "GRNT", "group": 2},
-        {"id": "RNT", "group": 2},
-        {"id": "SMOC", "group": 2},
-        {"id": "MRG", "group": 2},
-        {"id": "MRGT", "group": 2},
-        {"id": "MRGI", "group": 2},
-        {"id": "MRGX", "group": 2},
-        {"id": "GRPI", "group": 2},
-        {"id": "OCPI", "group": 2},
-        {"id": "BDS", "group": 2},
-        {"id": "RMS", "group": 2},
-        {"id": "NP", "group": 2},
-        {"id": "NPF", "group": 2},
-        {"id": "NOC", "group": 2},
-        {"id": "R18", "group": 2},
-        {"id": "R60", "group": 2},
-        {"id": "R65", "group": 2},
-        {"id": "MULTG", "group": 2},
-        {"id": "HFL", "group": 2},
-        {"id": "HHLDRACE", "group": 2},
-        {"id": "HHLDRAGE", "group": 2},
-        {"id": "HHLDSCHL", "group": 2},
-        {"id": "VACS", "group": 2},
-        {"id": "TEN", "group": 2},
-        {"id": "HINC", "group": 2},
-        {"id": "VAL", "group": 2},
-        {"id": "FMRGX", "group": 2},
-        {"id": "FMRGT", "group": 2},
-        {"id": "BATH", "group": 2},
-        {"id": "KIT", "group": 2},
-        {"id": "PLM", "group": 2},
-        {"id": "YBL", "group": 2},
-        {"id": "MVY", "group": 2},
-        {"id": "ELE", "group": 2},
-        {"id": "GAS", "group": 2},
-        {"id": "WAT", "group": 2},
-        {"id": "BLD", "group": 2},
-        {"id": "SMXH", "group": 2},
-        {"id": "SMXS", "group": 2},
-        {"id": "RNTM", "group": 2},
-        {"id": "SRNT", "group": 2},
+    const data1 = {
+  "Housing Affordability": ["AHINC", "FINC", "GRNT", "RNT", "SMOC", "MRG", "MRGT", "MRGX", "GRPI", "OCPI"],
+  "Housing Patterns": ["BDS", "RMS", "NP", "NPF", "NOC", "R18", "R60", "R65", "MULTG", "HFL", "HHLDRACE", "HHLDRAGE", "HHLDSCHL"],
+  "Housing Vacancies and Homeownership": ["VACS", "TEN", "HINC", "VAL", "FMRGX", "FMRGT"],
+  "New Residential Construction": ["BATH", "KIT", "PLM", "RMS", "YBL", "MVY", "ELE", "GAS", "WAT", "BLD", "SMXH", "SMXS"],
+  "Rental Housing Finance Survey (RHFS)": ["GRNT", "RNT", "GRPI", "SMOC", "MRG", "RNTM", "SRNT"],
+  "Residential Finance Survey (RFS)": ["MRG", "MRGT", "MRGI", "MRGX", "SMOC", "SMXH", "SMXS", "VAL"]
+};
+    const data2 = {
+  "Housing Affordability": ["AHSINC", "AHSMORT", "AHSRENT"],
+  "Housing Patterns": ["AHSPATTERN1", "AHSPATTERN2"],
+  "Housing Vacancies and Homeownership": ["AHSHOME1", "AHSHOME2"],
+  "New Residential Construction": ["AHSNEWCON1", "AHSNEWCON2"],
+  "Rental Housing Finance Survey (RHFS)": ["AHSRHFS1", "AHSRHFS2"],
+  "Residential Finance Survey (RFS)": ["AHSRFS1", "AHSRFS2"]
+};
+    const datasets = [
+  { name: "American Community Survey", data: data1 },
+  { name: "American Housing Survey", data: data2 },
+  // Add other datasets here: { name: "IPUMS 1940", data: data3 }, etc.
+];
 
+const gData = {
+  nodes: [
+    // First-Level Nodes (Datasets)
+    { id: "American Community Survey", group: 1 },
+    { id: "American Housing Survey", group: 1 },
+    // Add other dataset nodes
+    { id: "IPUMS 1940", group: 1 },
+    { id: "CPS", group: 1 },
+    { id: "Decennial Census 2010", group: 1 },
+    { id: "Family Options Study", group: 1 },
+    { id: "Moving to Opportunity", group: 1 },
+    { id: "NCVS 2017", group: 1 },
+    { id: "NSCH 2020", group: 1 },
 
-        // Third-Level Nodes (Categories)
-        {"id": "Housing Affordability", "group": 3},
-        {"id": "Housing Patterns", "group": 3},
-        {"id": "Housing Vacancies and Homeownership", "group": 3},
-        {"id": "New Residential Construction", "group": 3},
-        {"id": "Rental Housing Finance Survey (RHFS)", "group": 3},
-        {"id": "Residential Finance Survey (RFS)", "group": 3}
-      ],
-      "links": [
-        // Links from Datasets to Codes
-        {"source": "American Community Survey", "target": "AHINC", "value": 1},
-        {"source": "American Community Survey", "target": "FINC", "value": 1},
-        {"source": "American Community Survey", "target": "GRNT", "value": 1},
-        {"source": "American Community Survey", "target": "RNT", "value": 1},
-        {"source": "American Community Survey", "target": "SMOC", "value": 1},
-        {"source": "American Community Survey", "target": "MRG", "value": 1},
-        {"source": "American Community Survey", "target": "MRGT", "value": 1},
-        {"source": "American Community Survey", "target": "MRGI", "value": 1},
-        {"source": "American Community Survey", "target": "MRGX", "value": 1},
-        {"source": "American Community Survey", "target": "GRPI", "value": 1},
-        {"source": "American Community Survey", "target": "OCPI", "value": 1},
-        {"source": "American Community Survey", "target": "BDS", "value": 1 },
-        {"source": "American Community Survey", "target": "RMS", "value": 1 },
-        {"source": "American Community Survey", "target": "NP", "value": 1 },
-        {"source": "American Community Survey", "target": "NPF", "value": 1 },
-        {"source": "American Community Survey", "target": "NOC", "value": 1 },
-        {"source": "American Community Survey", "target": "R18", "value": 1 },
-        {"source": "American Community Survey", "target": "R60", "value": 1 },
-        {"source": "American Community Survey", "target": "R65", "value": 1 },
-        {"source": "American Community Survey", "target": "MULTG", "value": 1 },
-        {"source": "American Community Survey", "target": "HFL", "value": 1 },
-        {"source": "American Community Survey", "target": "HHLDRACE", "value": 1 },
-        {"source": "American Community Survey", "target": "HHLDRAGE", "value": 1 },
-        {"source": "American Community Survey", "target": "HHLDSCHL", "value": 1 },
-        {"source": "American Community Survey", "target": "VACS", "value": 1 },
-        {"source": "American Community Survey", "target": "TEN", "value": 1 },
-        {"source": "American Community Survey", "target": "HINC", "value": 1 },
-        {"source": "American Community Survey", "target": "VAL", "value": 1 },
-        {"source": "American Community Survey", "target": "FMRGX", "value": 1 },
-        {"source": "American Community Survey", "target": "FMRGT", "value": 1 },
-        {"source": "American Community Survey", "target": "BATH", "value": 1 },
-        {"source": "American Community Survey", "target": "KIT", "value": 1 },
-        {"source": "American Community Survey", "target": "PLM", "value": 1 },
-        {"source": "American Community Survey", "target": "YBL", "value": 1 },
-        {"source": "American Community Survey", "target": "MVY", "value": 1 },
-        {"source": "American Community Survey", "target": "ELE", "value": 1 },
-        {"source": "American Community Survey", "target": "GAS", "value": 1 },
-        {"source": "American Community Survey", "target": "WAT", "value": 1 },
-        {"source": "American Community Survey", "target": "BLD", "value": 1 },
-        {"source": "American Community Survey", "target": "SMXH", "value": 1 },
-        {"source": "American Community Survey", "target": "SMXS", "value": 1 },
-        {"source": "American Community Survey", "target": "RNTM", "value": 1},
-        {"source": "American Community Survey", "target": "SRNT", "value": 1 },
+    // Third-Level Nodes (Categories)
+    { id: "Housing Affordability", group: 3 },
+    { id: "Housing Patterns", group: 3 },
+    { id: "Housing Vacancies and Homeownership", group: 3 },
+    { id: "New Residential Construction", group: 3 },
+    { id: "Rental Housing Finance Survey (RHFS)", group: 3 },
+    { id: "Residential Finance Survey (RFS)", group: 3 }
+  ],
+  links: []
+};
 
-        // Links from Categories to Codes
-        {"source": "Housing Affordability", "target": "AHINC", "value": 1},
-        {"source": "Housing Affordability", "target": "FINC", "value": 1},
-        {"source": "Housing Affordability", "target": "GRNT", "value": 1},
-        {"source": "Housing Affordability", "target": "RNT", "value": 1},
-        {"source": "Housing Affordability", "target": "SMOC", "value": 1},
-        {"source": "Housing Affordability", "target": "MRG", "value": 1},
-        {"source": "Housing Affordability", "target": "MRGT", "value": 1},
-        {"source": "Housing Affordability", "target": "MRGX", "value": 1},
-        {"source": "Housing Affordability", "target": "GRPI", "value": 1},
-        {"source": "Housing Affordability", "target": "OCPI", "value": 1},
+// Loop through each dataset and populate nodes and links dynamically
+datasets.forEach(dataset => {
+  const { name, data } = dataset;
 
-        // Links from Categories to Codes
-        {"source": "Housing Patterns", "target": "BDS", "value": 1},
-        {"source": "Housing Patterns", "target": "RMS", "value": 1},
-        {"source": "Housing Patterns", "target": "NP", "value": 1},
-        {"source": "Housing Patterns", "target": "NPF", "value": 1},
-        {"source": "Housing Patterns", "target": "NOC", "value": 1},
-        {"source": "Housing Patterns", "target": "R18", "value": 1},
-        {"source": "Housing Patterns", "target": "R60", "value": 1},
-        {"source": "Housing Patterns", "target": "R65", "value": 1},
-        {"source": "Housing Patterns", "target": "MULTG", "value": 1},
-        {"source": "Housing Patterns", "target": "HFL", "value": 1},
-        {"source": "Housing Patterns", "target": "HHLDRACE", "value": 1},
-        {"source": "Housing Patterns", "target": "HHLDRAGE", "value": 1},
-        {"source": "Housing Patterns", "target": "HHLDSCHL", "value": 1},
+  // Loop through the categories within each dataset
+  Object.keys(data).forEach(category => {
+    data[category].forEach(code => {
+      // Add second-level nodes for each code
+      gData.nodes.push({ id: code, group: 2 });
 
-        {"source": "Housing Vacancies and Homeownership", "target": "VACS", "value": 1},
-        {"source": "Housing Vacancies and Homeownership", "target": "TEN", "value": 1},
-        {"source": "Housing Vacancies and Homeownership", "target": "HINC", "value": 1},
-        {"source": "Housing Vacancies and Homeownership", "target": "VAL", "value": 1},
-        {"source": "Housing Vacancies and Homeownership", "target": "FMRGX", "value": 1},
-        {"source": "Housing Vacancies and Homeownership", "target": "FMRGT", "value": 1},
+      // Create a link from the dataset to the code
+      gData.links.push({ source: name, target: code, value: 1 });
 
-        {"source": "New Residential Construction", "target": "BATH", "value": 1},
-        {"source": "New Residential Construction", "target": "KIT", "value": 1},
-        {"source": "New Residential Construction", "target": "PLM", "value": 1},
-        {"source": "New Residential Construction", "target": "RMS", "value": 1},
-        {"source": "New Residential Construction", "target": "YBL", "value": 1},
-        {"source": "New Residential Construction", "target": "MVY", "value": 1},
-        {"source": "New Residential Construction", "target": "ELE", "value": 1},
-        {"source": "New Residential Construction", "target": "GAS", "value": 1},
-        {"source": "New Residential Construction", "target": "WAT", "value": 1},
-        {"source": "New Residential Construction", "target": "BLD", "value": 1},
-        {"source": "New Residential Construction", "target": "SMXH", "value": 1},
-        {"source": "New Residential Construction", "target": "SMXS", "value": 1},
+      // Create a link from the code to the category
+      gData.links.push({ source: category, target: code, value: 1 });
+    });
+  });
+});
 
-        {"source": "Residential Finance Survey (RFS)", "target": "MRG", "value": 1},
-        {"source": "Residential Finance Survey (RFS)", "target": "MRGT", "value": 1},
-        {"source": "Residential Finance Survey (RFS)", "target": "MRGI", "value": 1},
-        {"source": "Residential Finance Survey (RFS)", "target": "MRGX", "value": 1},
-        {"source": "Residential Finance Survey (RFS)", "target": "SMOC", "value": 1},
-        {"source": "Residential Finance Survey (RFS)", "target": "SMXH", "value": 1},
-        {"source": "Residential Finance Survey (RFS)", "target": "SMXS", "value": 1},
-        {"source": "Residential Finance Survey (RFS)", "target": "VAL", "value": 1},
-
-        {"source": "Rental Housing Finance Survey (RHFS)", "target": "GRNT", "value": 1},
-        {"source": "Rental Housing Finance Survey (RHFS)", "target": "RNT", "value": 1},
-        {"source": "Rental Housing Finance Survey (RHFS)", "target": "GRPI", "value": 1},
-        {"source": "Rental Housing Finance Survey (RHFS)", "target": "SMOC", "value": 1},
-        {"source": "Rental Housing Finance Survey (RHFS)", "target": "MRG", "value": 1},
-        {"source": "Rental Housing Finance Survey (RHFS)", "target": "RNTM", "value": 1},
-        {"source": "Rental Housing Finance Survey (RHFS)", "target": "SRNT", "value": 1}
-      ]
-    };
-
+// Log the final graph data structure (for debugging)
+console.log(gData);
+   
     const Graph = ForceGraph3D()(document.getElementById('3d-graph'))
       .graphData(gData)
       .nodeAutoColorBy('group')
