@@ -1,0 +1,269 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>3D Knowledge Graph</title>
+  <style> body { margin: 0; } </style>
+
+  <script src="//unpkg.com/3d-force-graph"></script>
+  <script type="importmap">
+    {
+      "imports": {
+        "three": "//unpkg.com/three/build/three.module.js"
+      }
+    }
+  </script>
+</head>
+
+<body>
+  <div id="3d-graph" style="width: 100vw; height: 100vh;"></div>
+
+  <script type="module">
+    import SpriteText from "//unpkg.com/three-spritetext/dist/three-spritetext.mjs";
+
+    const gData = {
+      nodes: [
+        // First-Level Nodes (Datasets) with size 4
+        { id: "American Community Survey", group: 1, val: 4 },
+        { id: "American Housing Survey ", group: 1, val: 4 },
+        { id: "IPUMS 1940", group: 1, val: 4 },
+        { id: "CPS", group: 1, val: 4 },
+        { id: "Decennial Census 2010", group: 1, val: 4 },
+        { id: "Family Options Study", group: 1, val: 4 },
+        { id: "Moving to Opportunity", group: 1, val: 4 },
+        { id: "NCVS 2017", group: 1, val: 4 },
+        { id: "NSCH 2020", group: 1, val: 4 },
+
+        // Second-Level Nodes (Housing-Related Codes) with size 2
+        { id: "AHINC", group: 2, val: 2 },
+        { id: "FINC", group: 2, val: 2 },
+        { id: "GRNT", group: 2, val: 2 },
+        { id: "RNT", group: 2, val: 2 },
+        { id: "SMOC", group: 2, val: 2 },
+        { id: "MRG", group: 2, val: 2 },
+        { id: "MRGT", group: 2, val: 2 },
+        { id: "MRGI", group: 2, val: 2 },
+        { id: "MRGX", group: 2, val: 2 },
+        { id: "GRPI", group: 2, val: 2 },
+        { id: "OCPI", group: 2, val: 2 },
+        { id: "BDS", group: 2, val: 2 },
+        { id: "RMS", group: 2, val: 2 },
+        { id: "NP", group: 2, val: 2 },
+        { id: "NPF", group: 2, val: 2 },
+        { id: "NOC", group: 2, val: 2 },
+        { id: "R18", group: 2, val: 2 },
+        { id: "R60", group: 2, val: 2 },
+        { id: "R65", group: 2, val: 2 },
+        { id: "MULTG", group: 2, val: 2 },
+        { id: "HFL", group: 2, val: 2 },
+        { id: "HHLDRACE", group: 2, val: 2 },
+        { id: "HHLDRAGE", group: 2, val: 2 },
+        { id: "HHLDSCHL", group: 2, val: 2 },
+        { id: "VACS", group: 2, val: 2 },
+        { id: "TEN", group: 2, val: 2 },
+        { id: "HINC", group: 2, val: 2 },
+        { id: "VAL", group: 2, val: 2 },
+        { id: "FMRGX", group: 2, val: 2 },
+        { id: "FMRGT", group: 2, val: 2 },
+        { id: "BATH", group: 2, val: 2 },
+        { id: "KIT", group: 2, val: 2 },
+        { id: "PLM", group: 2, val: 2 },
+        { id: "RMS", group: 2, val: 2 },
+        { id: "YBL", group: 2, val: 2 },
+        { id: "MVY", group: 2, val: 2 },
+        { id: "HFL", group: 2, val: 2 },
+        { id: "ELE", group: 2, val: 2 },
+        { id: "GAS", group: 2, val: 2 },
+        { id: "WAT", group: 2, val: 2 },
+        { id: "BLD", group: 2, val: 2 },
+        { id: "SMXH", group: 2, val: 2 },
+        { id: "SMXS", group: 2, val: 2 },
+        { id: "RNTM", group: 2, val: 2 },
+        { id: "SRNT", group: 2, val: 2 },
+        { id: "HOUSEHOLD SIZE - AHS", group: 2, val: 2 },
+        { id: "MORTGAGE - AHS", group: 2, val: 2 },
+        { id: "HOUSING STATUS - IPUMS", group: 2, val: 2 },
+        { id: "HOUSE VALUE - IPUMS", group: 2, val: 2 },
+        { id: "RENTAL STATUS - CPS", group: 2, val: 2 },
+        { id: "MORTGAGE STATUS - CPS", group: 2, val: 2 },
+        { id: "HOUSING UNIT SIZE - Decennial Census", group: 2, val: 2 },
+        { id: "NUMBER OF ROOMS - Decennial Census", group: 2, val: 2 },
+        { id: "HOUSING SUBSIDY - Family Options", group: 2, val: 2 },
+        { id: "HOUSING ASSISTANCE - Family Options", group: 2, val: 2 },
+        { id: "HOPE VI Flag - Moving to Opportunity", group: 2, val: 2 },
+        { id: "ADDRESS ID - Moving to Opportunity", group: 2, val: 2 },
+        { id: "HOUSING CONDITION - NCVS", group: 2, val: 2 },
+        { id: "HOUSE OWNERSHIP - NCVS", group: 2, val: 2 },
+        { id: "HOUSING STABILITY - NSCH", group: 2, val: 2 },
+        { id: "RENTAL TYPE - NSCH", group: 2, val: 2 },
+
+        // Third-Level Nodes (Categories) with size 8
+        { id: "Housing Affordability", group: 3, val: 8 },
+        { id: "Housing Patterns", group: 3, val: 8 },
+        { id: "Housing Vacancies and Homeownership", group: 3, val: 8 },
+        { id: "New Residential Construction", group: 3, val: 8 },
+        { id: "Rental Housing Finance Survey (RHFS)", group: 3, val: 8 },
+        { id: "Residential Finance Survey (RFS)", group: 3, val: 8 },
+      ],
+      links: [
+        // First-Level Nodes: Datasets to Housing-Related Codes
+        { source: "American Community Survey", target: "AHINC" },
+        { source: "American Community Survey", target: "FINC" },
+        { source: "American Community Survey", target: "GRNT" },
+        { source: "American Community Survey", target: "RNT" },
+        { source: "American Community Survey", target: "SMOC" },
+        { source: "American Community Survey", target: "MRG" },
+        { source: "American Community Survey", target: "MRGT" },
+        { source: "American Community Survey", target: "MRGI" },
+        { source: "American Community Survey", target: "MRGX" },
+        { source: "American Community Survey", target: "GRPI" },
+        { source: "American Community Survey", target: "OCPI" },
+        { source: "American Community Survey", target: "BDS" },
+        { source: "American Community Survey", target: "RMS" },
+        { source: "American Community Survey", target: "NP" },
+        { source: "American Community Survey", target: "NPF" },
+        { source: "American Community Survey", target: "NOC" },
+        { source: "American Community Survey", target: "R18" },
+        { source: "American Community Survey", target: "R60" },
+        { source: "American Community Survey", target: "R65" },
+        { source: "American Community Survey", target: "MULTG" },
+        { source: "American Community Survey", target: "HFL" },
+        { source: "American Community Survey", target: "HHLDRACE" },
+        { source: "American Community Survey", target: "HHLDRAGE" },
+        { source: "American Community Survey", target: "HHLDSCHL" },
+        { source: "American Community Survey", target: "VACS" },
+        { source: "American Community Survey", target: "TEN" },
+        { source: "American Community Survey", target: "HINC" },
+        { source: "American Community Survey", target: "VAL" },
+        { source: "American Community Survey", target: "FMRGX" },
+        { source: "American Community Survey", target: "FMRGT" },
+        { source: "American Community Survey", target: "BATH" },
+        { source: "American Community Survey", target: "KIT" },
+        { source: "American Community Survey", target: "PLM" },
+        { source: "American Community Survey", target: "RMS" },
+        { source: "American Community Survey", target: "YBL" },
+        { source: "American Community Survey", target: "MVY" },
+        { source: "American Community Survey", target: "ELE" },
+        { source: "American Community Survey", target: "GAS" },
+        { source: "American Community Survey", target: "WAT" },
+        { source: "American Community Survey", target: "BLD" },
+        { source: "American Community Survey", target: "SMXH" },
+        { source: "American Community Survey", target: "SMXS" },
+        { source: "American Community Survey", target: "RNTM" },
+        { source: "American Community Survey", target: "SRNT" },
+        { source: "American Housing Survey", target: "HOUSEHOLD SIZE - AHS" },
+        { source: "American Housing Survey", target: "MORTGAGE - AHS" },
+        { source: "IPUMS 1940", target: "HOUSING STATUS - IPUMS" },
+        { source: "IPUMS 1940", target: "HOUSE VALUE - IPUMS" },
+        { source: "CPS", target: "RENTAL STATUS - CPS" },
+        { source: "CPS", target: "MORTGAGE STATUS - CPS" },
+        { source: "Decennial Census 2010", target: "HOUSING UNIT SIZE - Decennial Census" },
+        { source: "Decennial Census 2010", target: "NUMBER OF ROOMS - Decennial Census" },
+        { source: "Family Options Study", target: "HOUSING SUBSIDY - Family Options" },
+        { source: "Family Options Study", target: "HOUSING ASSISTANCE - Family Options" },
+        { source: "Moving to Opportunity", target: "HOPE VI Flag - Moving to Opportunity" },
+        { source: "Moving to Opportunity", target: "ADDRESS ID - Moving to Opportunity" },
+        { source: "NCVS 2017", target: "HOUSING CONDITION - NCVS" },
+        { source: "NCVS 2017", target: "HOUSE OWNERSHIP - NCVS" },
+        { source: "NSCH 2020", target: "HOUSING STABILITY - NSCH" },
+        { source: "NSCH 2020", target: "RENTAL TYPE - NSCH" },
+
+        // Second-Level Nodes: Housing-Related Codes to Categories
+        { source: "AHINC", target: "Housing Affordability" },
+        { source: "FINC", target: "Housing Affordability" },
+        { source: "GRNT", target: "Housing Affordability" },
+        { source: "RNT", target: "Housing Affordability" },
+        { source: "SMOC", target: "Housing Affordability" },
+        { source: "MRG", target: "Housing Affordability" },
+        { source: "MRGT", target: "Housing Affordability" },
+        { source: "MRGX", target: "Housing Affordability" },
+        { source: "GRPI", target: "Housing Affordability" },
+        { source: "OCPI", target: "Housing Affordability" },
+        { source: "BDS", target: "Housing Pattern" },
+        { source: "RMS", target: "Housing Pattern" },
+        { source: "NP", target: "Housing Pattern" },
+        { source: "NPF", target: "Housing Pattern" },
+        { source: "NOC", target: "Housing Pattern" },
+        { source: "R18", target: "Housing Pattern" },
+        { source: "BDS", target: "Housing Pattern" },
+        { source: "RMS", target: "Housing Pattern" },
+        { source: "NP", target: "Housing Pattern" },
+        { source: "NPF", target: "Housing Pattern" },
+        { source: "NOC", target: "Housing Pattern" },
+        { source: "R18", target: "Housing Pattern" },
+        { source: "R60", target: "Housing Pattern" },
+        { source: "R65", target: "Housing Pattern" },
+        { source: "MULTG", target: "Housing Pattern" },
+        { source: "HFL", target: "Housing Pattern" },
+        { source: "HHLDRACE", target: "Housing Pattern" },
+        { source: "HHLDRAGE", target: "Housing Pattern" },
+        { source: "HHLDSCHL", target: "Housing Pattern" },
+        { source: "VACS", target: "Housing Vacancies and Homeownership" },
+        { source: "TEN", target: "Housing Vacancies and Homeownership" },
+        { source: "HINC", target: "Housing Vacancies and Homeownership" },
+        { source: "VAL", target: "Housing Vacancies and Homeownership" },
+        { source: "FMRGX", target: "Housing Vacancies and Homeownership" },
+        { source: "FMRGT", target: "Housing Vacancies and Homeownership" },
+        { source: "BATH", target: "New Residential Construction" },
+        { source: "KIT", target: "New Residential Construction" },
+        { source: "PLM", target: "New Residential Construction" },
+        { source: "RMS", target: "New Residential Construction" },
+        { source: "YBL", target: "New Residential Construction" },
+        { source: "MVM", target: "New Residential Construction" },
+        { source: "MVY", target: "New Residential Construction" },
+        { source: "HFL", target: "New Residential Construction" },
+        { source: "ELE", target: "New Residential Construction" },
+        { source: "GAS", target: "New Residential Construction" },
+        { source: "WAT", target: "New Residential Construction" },
+        { source: "BLD", target: "New Residential Construction" },
+        { source: "SMXH", target: "New Residential Construction" },
+        { source: "SMXS", target: "New Residential Construction" },
+        { source: "GRNT", target: "Rental Housing Finance Survey (RHFS)" },
+        { source: "RNT", target: "Rental Housing Finance Survey (RHFS)" },
+        { source: "RNTM", target: "Rental Housing Finance Survey (RHFS)" },
+        { source: "SRNT", target: "Rental Housing Finance Survey (RHFS)" },
+        { source: "GRPI", target: "Rental Housing Finance Survey (RHFS)" },
+        { source: "SMOC", target: "Rental Housing Finance Survey (RHFS)" },
+        { source: "MRG", target: "Rental Housing Finance Survey (RHFS)" },
+        { source: "MRG", target: "Residential Finance Survey (RFS)" },
+        { source: "MRGT", target: "Residential Finance Survey (RFS)" },
+        { source: "MRGI", target: "Residential Finance Survey (RFS)" },
+        { source: "MRGX", target: "Residential Finance Survey (RFS)" },
+        { source: "SMOC", target: "Residential Finance Survey (RFS)" },
+        { source: "SMXH", target: "Residential Finance Survey (RFS)" },
+        { source: "SMXS", target: "Residential Finance Survey (RFS)" },
+        { source: "VAL", target: "Residential Finance Survey (RFS)" },
+        { source: "MORTGAGE - ACS", target: "Rental Housing Finance Survey (RHFS)" },
+        { source: "MORTGAGE - AHS", target: "Rental Housing Finance Survey (RHFS)" },
+        { source: "RENTAL STATUS - CPS", target: "Rental Housing Finance Survey (RHFS)" },
+        { source: "RENTAL TYPE - NSCH", target: "Rental Housing Finance Survey (RHFS)" },
+        { source: "HOUSING TYPE - ACS", target: "Housing Pattern" },
+        { source: "HOUSING CONDITION - NCVS", target: "New Residential Construction" },
+        { source: "HOUSE OWNERSHIP - NCVS", target: "New Residential Construction" },
+        { source: "HOUSING UNIT SIZE - Decennial Census", target: "Housing Pattern" },
+        { source: "NUMBER OF ROOMS - Decennial Census", target: "Housing Pattern" },
+        { source: "HOUSING SUBSIDY - Family Options", target: "Residential Finance Survey (RFS)" },
+        { source: "HOUSING ASSISTANCE - Family Options", target: "Residential Finance Survey (RFS)" },
+        { source: "HOUSING STABILITY - NSCH", target: "Housing Affordability" },
+        { source: "HOPE VI Flag - Moving to Opportunity", target: "Housing Affordability" }
+      ]
+    };
+
+    const Graph = ForceGraph3D()(document.getElementById('3d-graph'))
+      .graphData(gData)
+      .nodeAutoColorBy('group')
+      .nodeThreeObject(node => {
+        const sprite = new SpriteText(node.id);
+        sprite.material.depthWrite = false; // Make sprite background transparent
+        sprite.color = node.color;
+        sprite.textHeight = 5; // Smaller text to make it more readable
+        return sprite;
+      });
+
+    // Strengthen the connections and bring nodes closer
+    Graph.d3Force('charge').strength(-50);  // Smaller negative charge for closer nodes
+    Graph.d3Force('link').distance(50);     // Reduce link distance to bring nodes together
+  </script>
+</body>
+</html>
